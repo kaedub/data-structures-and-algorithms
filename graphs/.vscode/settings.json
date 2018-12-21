@@ -1,0 +1,8 @@
+{
+  "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.7/bin/python3",
+  "editor.cursorStyle": "block-outline",
+  "workbench.colorTheme": "Default High Contrast",
+  "editor.tokenColorCustomizations": {
+    "variables": "#FF6600"
+  }
+}

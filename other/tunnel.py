@@ -45,7 +45,7 @@ def tunnel(layers=[], size=None):
         layer_index = y
       
       # this gives the right quadrant its shape
-      if row+col>size:
+      if row+col>size-1:
         layer_index = y
 
       # this is where the indexing needs to change
@@ -66,7 +66,7 @@ def tunnel(layers=[], size=None):
     print('')
 
 
-tunnel(layers, 40)
+tunnel(layers, 50)
 # tunnel(layers)
 # tunnel(['0','-'])
 # tunnel(['0','-'], 20)

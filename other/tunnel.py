@@ -31,11 +31,13 @@ def tunnel(layers=[], size=None):
 
   reversed_layers = list(reversed(layers))
 
-  for row in range(size//2):
+  for row in range(size):
     x = row % len(layers)
     
     for col in range(size):
       y = col % len(layers)
+      # if row+col>size-1:
+      #   import pdb; pdb.set_trace()
 
       # this gives the top quadrant its shape
       layer_index = x
@@ -43,19 +45,29 @@ def tunnel(layers=[], size=None):
       # this gives the left quadrant its shape
       if row > col:
         layer_index = y
+
+      # elif row > row-col:
+      #   layer_index = ( len(layers)) - ( (row-1) % (len(layers) ) ) - 1
       
       # this gives the right quadrant its shape
-      if row+col>size-1:
-        layer_index = y
+      elif row+col>size-1:
+        layer_index = ( len(layers)) - ( (col-1) % (len(layers) ) ) - 1
 
-      # this is where the indexing needs to change
-      if col > size // 2:
-        color = colors[layer_index%len(colors)]
-        char = layers[ layer_index ]
-      else:
-        color = colors[ (layer_index%len(colors)) ]
-        char = layers[layer_index]
+
       
+      try:   
+        # this is where the indexing needs to change
+        if col > size // 2:
+          color = colors[layer_index%len(colors)]
+          char = layers[ layer_index ]
+        else:
+          color = colors[ (layer_index%len(colors)) ]
+          char = layers[layer_index]
+      except IndexError:
+        pass
+        # print('index out of range', layer_index)
+
+        
       # format color to char and space
       string = set_color_scheme(char, color)
       space = set_color_scheme('  ', color)

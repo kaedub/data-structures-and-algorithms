@@ -21,37 +21,38 @@ colors = [
 def set_color_scheme(text, color):
   return f'\x1b[{color}{text}\x1b[0m'
 
-def tunnel(layers=[], size=None):
+def tunnel(layers=[], size=None, offset=0):
+  layers_length = len(layers)
   if size == None:
-    size = len(layers)
+    size = layers_length
   if size % 2 == 0:
     size += 1
-  if len(layers) < 1:
+  if layers_length < 1:
     layers = list(range(8))
 
-  reversed_layers = list(reversed(layers))
-
-  for row in range(size):
-    x = row % len(layers)
+  for row in range(size//2-1):
+    x = row % layers_length
     
     for col in range(size):
-      y = col % len(layers)
       # if row+col>size-1:
       #   import pdb; pdb.set_trace()
 
       # this gives the top quadrant its shape
-      layer_index = x
+      
 
       # this gives the left quadrant its shape
       if row > col:
-        layer_index = y
+        layer_index = col % layers_length
 
       # elif row > row-col:
-      #   layer_index = ( len(layers)) - ( (row-1) % (len(layers) ) ) - 1
+      #   layer_index = ( layers_length) - ( (row-1) % (layers_length ) ) - 1
       
       # this gives the right quadrant its shape
       elif row+col>size-1:
-        layer_index = ( len(layers)) - ( (col-1) % (len(layers) ) ) - 1
+        layer_index = layers_length - ((col-1) % layers_length) - 1
+
+      else:
+        layer_index = x
 
 
       
@@ -70,7 +71,7 @@ def tunnel(layers=[], size=None):
         
       # format color to char and space
       string = set_color_scheme(char, color)
-      space = set_color_scheme('  ', color)
+      space = set_color_scheme(' ', color)
 
       # prints string without empty space instead of new line
       print(string, end=space)

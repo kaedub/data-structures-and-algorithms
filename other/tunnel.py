@@ -30,8 +30,11 @@ def tunnel(layers=[], size=None, offset=0):
   if layers_length < 1:
     layers = list(range(8))
 
-  for row in range(size//2-1):
+  for row in range(size//2):
+    # if row < layers_length:
     x = row % layers_length
+    # else:
+    #   x = layers_length - (row - (layers_length - 1)) 
     
     for col in range(size):
       # if row+col>size-1:
@@ -49,8 +52,7 @@ def tunnel(layers=[], size=None, offset=0):
       
       # this gives the right quadrant its shape
       elif row+col>size-1:
-        layer_index = layers_length - ((col-1) % layers_length) - 1
-
+        layer_index = layers_length - (col - (layers_length - 1))
       else:
         layer_index = x
 
@@ -79,7 +81,7 @@ def tunnel(layers=[], size=None, offset=0):
     print('')
 
 
-tunnel(layers, 50)
+tunnel(layers, 30)
 # tunnel(layers)
 # tunnel(['0','-'])
 # tunnel(['0','-'], 20)

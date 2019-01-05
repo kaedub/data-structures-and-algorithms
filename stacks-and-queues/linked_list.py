@@ -23,7 +23,6 @@ class LinkedList():
   def dequeue(self):
     pass
 
-
 class DoubleLL():
   def __init__(self, data):
     if isinstance(data, list):
@@ -36,9 +35,6 @@ class DoubleLL():
         previous.next = node
         # the node has been added, this one is now the previous to the next one
         previous =  node
-
-
-
 
 class Node():
   def __init__(self, data, next):
